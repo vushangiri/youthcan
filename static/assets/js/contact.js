@@ -58,16 +58,21 @@ $(document).ready(function(){
                 $(form).ajaxSubmit({
                     type:"POST",
                     data: $(form).serialize(),
-                    url:"contact_process.php",
-                    success: function() {
-                        $('#contactForm :input').attr('disabled', 'disabled');
-                        $('#contactForm').fadeTo( "slow", 1, function() {
-                            $(this).find(':input').attr('disabled', 'disabled');
-                            $(this).find('label').css('cursor','default');
-                            $('#success').fadeIn()
-                            $('.modal').modal('hide');
-		                	$('#success').modal('show');
-                        })
+                    url:"/contact",
+                    success: function(resp) {
+                        if(resp.sent == 'saved'){
+                            $("#contactForm").trigger("reset");
+                            bootbox.alert({
+                                message: "Message Sent Successfully",
+                                backdrop: true
+                            });
+                        }else {
+                            $("#contactForm").trigger("reset");
+                            bootbox.alert({
+                                message: "Internal Error",
+                                backdrop: true
+                            });
+                        }
                     },
                     error: function() {
                         $('#contactForm').fadeTo( "slow", 1, function() {

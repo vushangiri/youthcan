@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="manifest" href="/site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/ico2.ico' %}">
-
+    {% block link %}
+    {% endblock %}
 	<!-- CSS here -->
 	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
@@ -25,8 +26,9 @@
 	<link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    {% block link %}
-    {% endblock %}
+    
+    
+    
 </head>
 <body>
     <!-- ? Preloader Start -->
@@ -67,7 +69,7 @@
                                 <div class="header-info-right d-flex align-items-center">
                                     
                                     <ul class="contact-now">     
-                                        <li><a href="#">Subscribe Now</a></li>
+                                        <li><a href="#" id='subscribe'>Subscribe Now</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -100,7 +102,7 @@
                                                         <li><a href="elements.html">Element</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a href="/contact">Contact</a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -122,6 +124,20 @@
         <!-- Header End -->
     </header>
     <!-- header end -->
+    <div>
+        {% for messages in messages %}
+    
+        <script>
+            window.onload = startcountdown;
+             function startcountdown(){
+                bootbox.alert({
+                    message: '{{messages}}'
+                    
+                })
+            }
+            </script> 
+        {%endfor%}
+    </div>
     {% block body %}
     {% endblock %}
     
@@ -137,7 +153,7 @@
                             <div class="single-footer-caption mb-30">
                                 <div class="footer-tittle">
                                     <div class="footer-logo mb-20">
-                                        <a href="/"><img src="{% static 'assets/img/logo/logo2_footer.png' %}" alt=""></a>
+                                        <a href="/"><img src="{% static 'assets/img/logo/logowhite.png' %}" width='100' height='80' alt=""></a>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +182,7 @@
                                         <li><a href="#">Projects</a></li>
                                         <li><a href="/about">About Us</a></li>
                                         <li><a href="#">Testimonials</a></li>
-                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="/contact">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -180,19 +196,19 @@
                                 </div>
                                 <!-- Form -->
                                 <div class="footer-form" >
-                                    <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                        method="get" class="subscribe_form relative mail_part">
-                                            <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                                            class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = ' Email Address '">
-                                            <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit"
-                                                class="email_icon newsletter-submit button-contactForm"><img src="{% static 'assets/img/gallery/form.png' %}" alt=""></button>
-                                            </div>
-                                            <div class="mt-10 info"></div>
-                                        </form>
-                                    </div>
+                                    
+                                    <form action="/subscribe"
+                                    method="post" class="subscribe_form relative mail_part">{% csrf_token %}
+                                        <input type="email" name="email" placeholder="Email Address"
+                                        class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = ' Email Address '" required>
+                                        <div class="form-icon">
+                                            <button type="submit" name="submit"
+                                            class="email_icon newsletter-submit button-contactForm"><img src="{% static 'assets/img/gallery/form.png' %}" alt=""></button>
+                                        </div>
+                                        
+                                    </form>
+                                    
                                 </div>
                                 </div>
                             </div>
@@ -208,7 +224,7 @@
                             <div class="col-xl-10 col-lg-9 ">
                                 <div class="footer-copy-right">
                                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> YOUTH CAN | All rights reserved | Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> YOUTH CAN | All rights reserved | Template is licensed under <a href="https://colorlib.com" target="_blank">Colorlib</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                                 </div>
                             </div>
@@ -276,6 +292,41 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="{% static './assets/js/plugins.js' %}"></script>
     <script src="{% static './assets/js/main.js' %}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.js'></script>
+    <script>
+    $(document).ready(function(){
+        $('#subscribe').click(function(event){
+            event.preventDefault();
+            var dialog = bootbox.prompt({
+                title: "Please enter your email address to Subscribe for Newsletter",
+                backdrop: true,
+                callback: function (result) {
+                   if(result == null) {
+                        dialog.modal('hide');
+                   }else {
+                        $.ajax({
+                        url: '/subscribe',
+                        type: 'POST',
+                        data: { 
+                            'result': result 
+                        },         
+                        }).done(function(resp) {
+                            if(resp.result == 'ok') {
+                                bootbox.alert('Thank You for Subscribing')
+                            }else {
+                                bootbox.alert('Please provide a valid email address')
+                            }
+                        })
+                   }
+                }   
+            });
+        });
+    });
+        
+
+    
+        
+    </script>
     
     </body>
 </html>

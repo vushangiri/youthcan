@@ -1,0 +1,19 @@
+<script>
+    
+    var mymap = L.map('mapid').setView([0, 0], 15);
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=HxK0MNt10Jewj7qQOFbF', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        maxZoom: 25,
+        
+        
+    }).addTo(mymap);
+    var marker = L.marker([27.667784, 85.336125]).addTo(mymap);
+    var circle = L.circle([27.667784, 85.336125], {
+        color: '#33AAFF',
+        fillColor: '#33AAFF',
+        fillOpacity: 0.3,
+        radius: 250
+    }).addTo(mymap);
+    marker.bindPopup("Gwarko, Kathmandu").openPopup();
+
+</script>
