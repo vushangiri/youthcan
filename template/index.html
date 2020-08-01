@@ -287,79 +287,36 @@
                     <!-- Section Tittle -->
                     <div class="section-tittle section-tittle2 text-center mb-70">
                         <span>What we are doing</span>
-                        <h2>Our Expert Volunteer Alwyes ready</h2>
+                        <h2>Our Expert Volunteer Always ready</h2>
                     </div> 
                 </div>
             </div>
             <div class="row">
+                {% for team in teams %}
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-team mb-30">
                         <div class="team-img">
-                            <img src="{% static 'assets/img/gallery/team1.png' %}" alt="">
+                            <img src="{{ team.photo.url }}" alt="">
                             <!-- Blog Social -->
                             <ul class="team-social">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fas fa-globe"></i></a></li>
+                                {% if team.facebook != None %}
+                                    <li><a href="{{ team.facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                {% endif %}
+                                {% if team.linkedin != None %}
+                                <li><a href="{{ team.linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                {% endif %}
+                                {% if team.instagram != None %}
+                                <li><a href="{{ team.instagram }}"><i class="fab fa-instagram"></i></a></li>
+                                {% endif %}
                             </ul>
                         </div>
                         <div class="team-caption">
-                            <h3><a href="instructor.html">Bruce Roberts</a></h3>
-                            <p>Volunteer leader</p>
+                            <h3>{{ team.first_name }} {{ team.last_name }}</h3>
+                            <p>{{ team.post }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-team mb-30">
-                        <div class="team-img">
-                            <img src="{% static 'assets/img/gallery/team2.png' %}" alt="">
-                            <!-- Blog Social -->
-                            <ul class="team-social">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fas fa-globe"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="team-caption">
-                            <h3><a href="instructor.html">Robart Rechard</a></h3>
-                            <p>Volunteer leader</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-team mb-30">
-                        <div class="team-img">
-                            <img src="{% static 'assets/img/gallery/team3.png' %}" alt="">
-                            <!-- Blog Social -->
-                            <ul class="team-social">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fas fa-globe"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="team-caption">
-                            <h3><a href="instructor.html">Brendon Tailor</a></h3>
-                            <p>Volunteer leader</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-team mb-30">
-                        <div class="team-img">
-                            <img src="{% static 'assets/img/gallery/team4.png' %}" alt="">
-                            <!-- Blog Social -->
-                            <ul class="team-social">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fas fa-globe"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="team-caption">
-                            <h3><a href="instructor.html">Walshr Hasgt</a></h3>
-                            <p>Volunteer leader</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -382,17 +339,17 @@
         </div>
     </section>
     <!-- Want To work End -->
-    <!--? Testimonial Start -->
+    <!--? Testimonial Start 
     <div class="testimonial-area testimonial-padding">
         <div class="container">
-            <!-- Testimonial contents -->
+            
             <div class="row d-flex justify-content-center">
                 <div class="col-xl-8 col-lg-8 col-md-10">
                     <div class="h1-testimonial-active dot-style">
-                        <!-- Single Testimonial -->
+                      
                         <div class="single-testimonial text-center">
                             <div class="testimonial-caption ">
-                                <!-- founder -->
+                               
                                 <div class="testimonial-founder">
                                     <div class="founder-img mb-40">
                                         <img src="{% static 'assets/img/gallery/testimonial.png' %}" alt="">
@@ -405,10 +362,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Single Testimonial -->
+                        
                         <div class="single-testimonial text-center">
                             <div class="testimonial-caption ">
-                                <!-- founder -->
+                              
                                 <div class="testimonial-founder">
                                     <div class="founder-img mb-40">
                                         <img src="{% static 'assets/img/gallery/testimonial.png' %}" alt="">
@@ -421,10 +378,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Single Testimonial -->
+                        
                         <div class="single-testimonial text-center">
                             <div class="testimonial-caption ">
-                                <!-- founder -->
+                               
                                 <div class="testimonial-founder">
                                     <div class="founder-img mb-40">
                                         <img src="{% static 'assets/img/gallery/testimonial.png' %}" alt="">
@@ -442,7 +399,7 @@
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    Testimonial End -->
     <!--? Blog Area Start -->
     <section class="home-blog-area section-padding30">
         <div class="container">
@@ -496,7 +453,7 @@
         </div>
     </section>
     <!-- Blog Area End -->
-    <!--? Count Down Start -->
+    <!--? Count Down Start 
     <div class="count-down-area pt-25 section-bg" data-background="{% static 'assets/img/gallery/section_bg02.png' %}">
         <div class="container">
             <div class="row justify-content-center">
@@ -504,7 +461,7 @@
                     <div class="count-down-wrapper" >
                         <div class="row justify-content-between">
                             <div class="col-lg-3 col-md-6 col-sm-6">
-                                <!-- Counter Up -->
+                                
                                 <div class="single-counter text-center">
                                     <span class="counter color-green">6,200</span>
                                     <span class="plus">+</span>
@@ -512,7 +469,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-6">
-                                <!-- Counter Up -->
+                               
                                 <div class="single-counter text-center">
                                     <span class="counter color-green">80</span>
                                     <span class="plus">+</span>
@@ -520,7 +477,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-6">
-                                <!-- Counter Up -->
+                               
                                 <div class="single-counter text-center">
                                     <span class="counter color-green">256</span>
                                     <span class="plus">+</span>
@@ -528,7 +485,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-6">
-                                <!-- Counter Up -->
+                                
                                 <div class="single-counter text-center">
                                     <span class="counter color-green">256</span>
                                     <span class="plus">+</span>
@@ -541,6 +498,6 @@
             </div>
         </div>
     </div>
-    <!-- Count Down End -->
+    Count Down End -->
     </main>
 {% endblock %}

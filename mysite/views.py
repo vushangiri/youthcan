@@ -1,5 +1,5 @@
 from .forms import ContactForm
-from .models import Contact, Newsletter
+from .models import Contact, Newsletter, Team
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -8,7 +8,11 @@ from validate_email import validate_email
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    teams = Team.objects.all()
+    context = {
+        'teams': teams
+    }
+    return render(request, 'index.html', context)
 
 def about(request):
     return render(request, 'about.html')

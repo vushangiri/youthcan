@@ -13,3 +13,17 @@ class Newsletter(models.Model):
     email = models.EmailField()
     def __str__(self):
         return self.email
+
+class Team(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    post = models.CharField(max_length=50)
+    photo = models.ImageField(upload_to='pics')
+    facebook = models.URLField(null=True, blank=True)
+    instagram = models.URLField(null=True, blank=True)
+    linkedin = models.URLField(null=True, blank=True)
+
+
+    def __str__(self):
+        return self.first_name
+
