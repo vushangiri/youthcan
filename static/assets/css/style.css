@@ -2958,6 +2958,7 @@ hr {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 22px;
+  
   color: #1e74c9;
   text-transform: capitalize;
   display: inline-block;
@@ -3687,6 +3688,7 @@ hr {
 /* line 1, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_about.scss */
 .about-low-area {
   position: relative;
+  background: #1e74c9;
 }
 
 /* line 5, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_about.scss */
@@ -3858,7 +3860,7 @@ hr {
 
 /* line 1, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_services_section.scss */
 .service-area {
-  background: #f8fcff;
+  background: #1e74c9;
 }
 
 /* line 3, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_services_section.scss */
@@ -4019,7 +4021,7 @@ hr {
 
 /* line 1, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_cases.scss */
 .our-cases-area {
-  background: #f8fcff;
+  background: #1e74c9;
 }
 
 /* line 4, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_cases.scss */
@@ -4535,7 +4537,7 @@ hr {
 
 /* line 1, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_team.scss */
 .team-area {
-  background: #f8fcff;
+  background: #1e74c9;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -4952,7 +4954,7 @@ hr {
 
 /* line 3, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_blog_page.scss */
 .home-blog-area {
-  background: #f8fcff;
+  background: #1e74c9;
 }
 
 /* line 5, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_blog_page.scss */

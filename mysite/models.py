@@ -27,3 +27,11 @@ class Team(models.Model):
     def __str__(self):
         return self.first_name
 
+class Partners(models.Model):
+    name = models.CharField(max_length=50)
+    photo = models.ImageField(upload_to='logo')
+
+    def __str__(self):
+        return self.name
+
+
