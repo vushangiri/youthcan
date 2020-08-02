@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/xtra/img.css' %}">
     
     
     
@@ -77,13 +78,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="header-bottom  header-sticky">
+                <div class="header-bottom  header-sticky" style='background:#011033;'>
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="/"><img src="{% static 'assets/img/logo/fulllogo.png' %}" width='220' height='80' alt=""></a>
+                                    <a href="/"><img src="{% static 'assets/img/logo/fulllogowhite.png' %}" width='220' height='80' alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10">
@@ -109,7 +110,7 @@
                                     </div>
                                     <!-- Header-btn -->
                                     <div class="header-right-btn d-none d-lg-block ml-20">
-                                        <a href="contact.html" class="btn header-btn">Donate</a>
+                                        <a href="/contact" class="button button-contactForm boxed-btn">Donate</a>
                                     </div>
                                 </div>
                             </div> 
@@ -296,6 +297,7 @@
     <script src="{% static './assets/js/main.js' %}"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.js'></script>
     <script src="{% static './assets/xtra/slider.js' %}"></script>
+    <script src="{% static './assets/xtra/img.js' %}"></script>
     <script>
     $(document).ready(function(){
         $('#subscribe').click(function(event){

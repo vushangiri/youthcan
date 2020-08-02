@@ -15,7 +15,11 @@ def index(request):
     return render(request, 'index.html', context)
 
 def about(request):
-    return render(request, 'about.html')
+    teams = Team.objects.all()
+    context = {
+        'teams': teams
+    }
+    return render(request, 'about.html', context)
 
 def contact(request):
     data = ContactForm()

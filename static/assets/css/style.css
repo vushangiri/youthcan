@@ -599,7 +599,7 @@ hr {
 
 /* line 332, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
 .cal-btn i {
-  color: #1e74c9 !important;
+  color: white !important;
   font-size: 31px;
   font-weight: 300;
   margin-right: 10px;
@@ -607,7 +607,7 @@ hr {
 
 /* line 338, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
 .cal-btn > p {
-  color: #072366 !important;
+  color: white !important;
   font-weight: 700;
   font-size: 16px;
   display: inline-block;
@@ -3300,7 +3300,7 @@ hr {
 
 /* line 161, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_headerMenu.scss */
 .main-header .main-menu ul li a {
-  color: #072366;
+  color: white;;
   font-weight: 400;
   padding: 39px 19px;
   display: block;
@@ -3565,7 +3565,7 @@ hr {
     line-height: 1.2;
   }
 }
-
+cal-btn
 /* line 64, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_h1-hero.scss */
 .slider-area .hero__caption span {
   font-size: 18px;
@@ -3636,7 +3636,7 @@ hr {
 
 /* line 113, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_h1-hero.scss */
 .slider-area2 {
-  background-image: url(../img/hero/hero2.png);
+  
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -4433,7 +4433,7 @@ hr {
 
 /* line 1, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_wantTowork.scss */
 .wantToWork-area {
-  background: #f8fcff;
+  background: #1e74c9;
   padding-bottom: 150px;
 }
 
@@ -4460,7 +4460,7 @@ hr {
 
 /* line 14, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_wantTowork.scss */
 .wantToWork-area .wantToWork-caption h2 {
-  color: #fff;
+  color: #1e74c9;
   font-size: 35px;
   font-weight: 700;
   line-height: 1.5;
@@ -5528,7 +5528,102 @@ hr {
   background: #fff;
   font-size: 14px;
 }
+.video_bg {
+  background-image: url(/static/assets/img/gallery/case3.png);
+}
 
+/* line 4, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_area {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 190px 0;
+}
+
+@media (max-width: 767px) {
+  /* line 4, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+  .video_area {
+    padding: 100px 0;
+  }
+}
+
+/* line 12, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_area.overlay:before {
+  opacity: .2;
+}
+
+/* line 16, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_area .video_wrap h3 {
+  font-family: "Nothing You Could Do", cursive;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 90px;
+  color: #fff;
+  margin-bottom: 55px;
+}
+
+@media (max-width: 767px) {
+  /* line 16, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+  .video_area .video_wrap h3 {
+    font-size: 50px;
+  }
+}
+
+/* line 28, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_area .video_wrap .video_icon a {
+  width: 84px;
+  height: 84px;
+  text-align: center;
+  line-height: 84px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: #1e74c9;
+  display: inline-block;
+  color: #fff;
+  font-size: 17px;
+}
+
+/* line 38, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_area .video_wrap .video_icon a i {
+  font-size: 17px;
+  line-height: 84px;
+  position: relative;
+  left: 2px;
+  top: -1px;
+}
+
+/* line 49, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_play_button {
+  position: relative;
+}
+
+/* line 52, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_video.scss */
+.video_play_button:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #1e74c9;
+  border-radius: 50%;
+  animation: pulse-border 1500ms ease-out infinite;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+@keyframes pulse-border {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
 /* End Causes Area css
 ============================================================================================ */
 /*================= latest_blog_area css =============*/
@@ -6600,7 +6695,7 @@ hr {
 
 /* line 16, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_contact.scss */
 .contact-info__icon i, .contact-info__icon span {
-  color: #8f9195;
+  color: white;
   font-size: 27px;
 }
 
