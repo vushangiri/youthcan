@@ -1,4 +1,13 @@
 /* Slider */
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-slide img {
+    border-radius: 90%;
+    width: 100px;
+}
+
 .slick-slider
 {
     position: relative;
