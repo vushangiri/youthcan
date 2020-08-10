@@ -1,166 +1,137 @@
 {% extends 'base.html' %}
+
 {% load static %}
+{% block title %}Program{% endblock %}
 {% block body %}
 <main>
-    <div class="slider-area2" style='background-image: url(/static/assets/img/hero/hero2.png);'>
-        <div class="slider-height2 d-flex align-items-center">
-            
-        </div>
-    </div>
-    <div class="container">
+    
+    <div class="container" style='padding-top: 20px;'>
         <div class="row">
             <div class="col-xl-12">
                 <div class="hero-cap hero-cap2 pt-20 text-center">
-                    <h1>{{ one_event.title }}</h1>
+                    <h1 style='font-size: 50px;'>{{ one_event.title }}</h1>
                 </div>
             </div>
         </div>
     </div>
     <div class='container'>
         <div class="section-top-border">
-            <h3 class="mb-30">Left Aligned</h3>
+            <h1 class="mb-30">Left Aligned</h1>
             <div class="row">
-                <div class="col-md-3">
-                    <img src="assets/img/elements/d.jpg" alt="" class="img-fluid">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <div class='slideshowContainer-small'>
+                        {% for image in one_event_image %}
+                            <img src="{{ image.photo.url }}" class="imageSlides" style="width: 100%;height: 330px;border-radius: 20px;">             
+                        {% endfor %}
+                        <span id ="leftArrow" class="slideshowArrow">&#8249;</span>
+                        <span id ="rightArrow" class="slideshowArrow">&#8250;</span>
+                        
+                        <div class="slideshowCircles">
+                        <!-- Filled 'dot' class is set to first image in slideshow, and then via Javascript the filled 'dot' class follows the current image.
+                        Make sure you match the number of these 'circle' span elements to the number of images in your slideshow. -->
+                        {% for i in one_event_range %}
+                            <span class="circle {% if forloop.counter0 == 0 %} dot {% endif %}"></span>
+                        
+                        {% endfor %}
+                        </div>
+                        
+                    </div>
                 </div>
-                <div class="col-md-9 mt-sm-20">
-                    <p>{{ one_event.body }}</p>
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <p>
+                        {% autoescape off %}
+                        {{ one_event.body_left }}
+                        {% endautoescape %}
+                    </p>
                 </div>
             </div>
         </div>
     </div>
     <div class='container'>
         <div class="section-top-border text-right">
-            <h3 class="mb-30">Right Aligned</h3>
+            <h1 class="mb-30">Right Aligned</h1>
             <div class="row">
                 <div class="col-md-9">
-                    <p class="text-right">Over time, even the most sophisticated, memory packed computer can begin
-                        to run slow if we
-                        don’t do something to prevent it. The reason why has less to do with how computers are made
-                        and how they age and
-                        more to do with the way we use them. You see, all of the daily tasks that we do on our PC
-                        from running programs
-                        to downloading and deleting software can make our computer sluggish. To keep this from
-                        happening, you need to
-                        understand the reasons why your PC is getting slower and do something to keep your PC
-                        running at its best. You
-                        can do this through regular maintenance and PC performance optimization programs</p>
-                    <p class="text-right">Before we discuss all of the things that could be affecting your PC’s
-                        performance, let’s
-                        talk a little about what symptoms</p>
+                    <p class="text-right">
+                        {% autoescape off %}
+                        {{ one_event.body_right }}
+                        {% endautoescape %}
+                    </p>
                 </div>
                 <div class="col-md-3">
-                    <img src="assets/img/elements/d.jpg" alt="" class="img-fluid">
+                    <img src="{{ one_event.photo.url }}" width='100%' height='270px;' style='border-radius: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ' alt="">
                 </div>
             </div>
         </div>
     </div>
-   
-    <div class="section-top-border">
-        <h3 class="mb-30">Definition</h3>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="single-defination">
-                    <h4 class="mb-20">Definition 01</h4>
-                    <p>Recently, the US Federal government banned online casinos from operating in America by
-                        making it illegal to
-                        transfer money to them through any US bank or payment system. As a result of this law,
-                        most of the popular
-                        online casino networks</p>
+    <div class='container'>
+        <div class='row'>
+            <section class="sample-text-area">
+                <div class="container box_1170">
+                    <h3 class="text-heading">Text Sample</h3>
+                    <p class="sample-text">
+                        {% autoescape off %}
+                        {{ one_event.body_center }}
+                        {% endautoescape %}
+                    </p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-defination">
-                    <h4 class="mb-20">Definition 02</h4>
-                    <p>Recently, the US Federal government banned online casinos from operating in America by
-                        making it illegal to
-                        transfer money to them through any US bank or payment system. As a result of this law,
-                        most of the popular
-                        online casino networks</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-defination">
-                    <h4 class="mb-20">Definition 03</h4>
-                    <p>Recently, the US Federal government banned online casinos from operating in America by
-                        making it illegal to
-                        transfer money to them through any US bank or payment system. As a result of this law,
-                        most of the popular
-                        online casino networks</p>
+            </section>
+        </div>
+        <div class='row'>
+            <div class="section-top-border">
+                <h3 class="mb-30">Block Quotes</h3>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <blockquote class="generic-blockquote">
+                            {% autoescape off %}
+                            {{ one_event.body_quotes }}
+                            {% endautoescape %}
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        
     </div>
-    <div class="section-top-border">
-        <h3 class="mb-30">Block Quotes</h3>
-        <div class="row">
-            <div class="col-lg-12">
-                <blockquote class="generic-blockquote">
-                    “Recently, the US Federal government banned online casinos from operating in America by
-                    making it illegal to
-                    transfer money to them through any US bank or payment system. As a result of this law, most
-                    of the popular
-                    online casino networks such as Party Gaming and PlayTech left the United States. Overnight,
-                    online casino
-                    players found themselves being chased by the Federal government. But, after a fortnight, the
-                    online casino
-                    industry came up with a solution and new online casinos started taking root. These began to
-                    operate under a
-                    different business umbrella, and by doing that, rendered the transfer of money to and from
-                    them legal. A major
-                    part of this was enlisting electronic banking systems that would accept this new
-                    clarification and start doing
-                    business with me. Listed in this article are the electronic banking”
-                </blockquote>
+    <div class='container' style='padding-top: 20px;padding-bottom: 50px;'>
+        <div class='row justify-content-center' style='position:relative;'>
+            <button type='button' id='{{ prevdata.id }}' {% if prevdata.id is None %}disabled{% endif %} class='boxed-btn pagi-nate' style='position: absolute;left: 0px;'>Previous</button>
+            
+            <button type='button' id='{{ nextdata.id }}' {% if nextdata.id is None %}disabled{% endif %} class='boxed-btn pagi-nate' style='position: absolute;right: 0px;'>Next</button>
+        </div>
+    </div>
+    <div class='container'>
+        <div class="section-top-border">
+            <h1>Related Images</h1>
+            <div class="row gallery-item">
+                {% for image in one_event_image %}
+                <div class="col-md-4">
+                    <a href="{{ image.photo.url }}" class="img-pop-up">
+                        <div class="single-gallery-image" style="background: url({{ image.photo.url }});"></div>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-    <div class="section-top-border">
-        <h3>Image Gallery</h3>
-        <div class="row gallery-item">
-            <div class="col-md-4">
-                <a href="assets/img/elements/g1.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g1.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="assets/img/elements/g2.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g2.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="assets/img/elements/g3.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g3.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="assets/img/elements/g4.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g4.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="assets/img/elements/g5.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g5.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="assets/img/elements/g6.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g6.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="assets/img/elements/g7.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g7.jpg);"></div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="assets/img/elements/g8.jpg" class="img-pop-up">
-                    <div class="single-gallery-image" style="background: url(assets/img/elements/g8.jpg);"></div>
-                </a>
-            </div>
-        </div>
-    </div>
+    
 
 </main>
     
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+    $('.pagi-nate').click(function(event){
+        event.preventDefault();
+        var data = $(this).attr('id'); 
+        
+        if (data != null) {
+            window.location.href = '/program?data=' + data; 
+        }
+               
+    });
+});  
+</script>
 {% endblock %}

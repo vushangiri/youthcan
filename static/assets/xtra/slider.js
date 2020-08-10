@@ -10,12 +10,12 @@ $(document).ready(function(){
         responsive: [{
             breakpoint: 768,
             settings: {
-                slidesToShow: 4
+                slidesToShow: 3
             }
         }, {
             breakpoint: 520,
             settings: {
-                slidesToShow: 4
+                slidesToShow: 3
             }
         }]
     });

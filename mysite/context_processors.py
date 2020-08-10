@@ -1,13 +1,18 @@
 from .models import Admin
+from .forms import ApplyForm
 
 def add_variable_to_context(request):
-    
-    data = Admin.objects.get(active=True)
-            
-    context = { 
+    if Admin.objects.filter(active=True).exists():
+        data = Admin.objects.get(active=True)
+        application = ApplyForm()
+                
+        context = { 
 
-        'data': data
+            'data': data,
+            'application': application
 
-    }
-    return context
+        }
+        return context
+    else:
+        return {}
  

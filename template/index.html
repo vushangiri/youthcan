@@ -12,14 +12,17 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
                             <div class="hero__caption">
-                                <h1 data-animation="fadeInUp" data-delay=".6s">{{ home.title }}</h1>
-                                <P data-animation="fadeInUp" data-delay=".8s">{{ home.body }}</P>
+                                <P data-animation="fadeInUp" data-delay=".8s">
+                                    {% autoescape off %}
+                                    {{ home.body }}
+                                    {% endautoescape %}
+                                </P>
                                 <!-- Hero-btn -->
                                 <div class="hero__btn">
                                     <a href="{{ home.video_url }}" class="popup-video button button-contactForm boxed-btn-blue"  data-animation="fadeInLeft" data-delay=".8s"><i class="fa fa-play"> Watch Video</i></a>
-                                    <a href="/contact" class="cal-btn ml-15" data-animation="fadeInRight" data-delay="1.0s" >
+                                    <a href="tel:{{ data.phone }}" class="cal-btn ml-15" data-animation="fadeInRight" data-delay="1.0s" >
                                         <i class="flaticon-null"></i>
-                                        <P>+977-{{ home.phone }}</P>
+                                        <P>+977-{{ data.phone }}</P>
                                     </a>
                                 </div>
                             </div>
@@ -33,22 +36,33 @@
     <div class='container' style="padding-top: 30px;padding-bottom: 30px;">
         <div class='row'>
             <div class="col">
-                <div class='slideshow-container'>
+                <div class='slideshowContainer'>
                     {% for photo in body_image %}
-                    <div class="mySlides fade">
-                        <div class="numbertext">{{ forloop.counter }} / {{ body_image_count }}</div>
-                        <img src="{{ photo.photo.url }}" style="width: 600px;height: 400px;border-radius: 20px;">
-                        
-                    </div>
-                    {% endfor %}
                     
+                       
+                        <img src="{{ photo.photo.url }}" class="imageSlides" style="width: 600px;height: 400px;border-radius: 20px;">
+                        
+                    
+                    {% endfor %}
+                    <span id ="leftArrow" class="slideshowArrow">&#8249;</span>
+                    <span id ="rightArrow" class="slideshowArrow">&#8250;</span>
+                    
+                    <div class="slideshowCircles">
+                    <!-- Filled 'dot' class is set to first image in slideshow, and then via Javascript the filled 'dot' class follows the current image.
+                    Make sure you match the number of these 'circle' span elements to the number of images in your slideshow. -->
+                    {% for i in body_range %}
+                        <span class="circle {% if forloop.counter0 == 0 %} dot {% endif %}"></span>
+                        
+                    {% endfor %}
+                    </div>
                 </div>
             </div>
             <div class="col">
                 <div class="section-tittle text-right mb-80">
-                    <h2>{{ body_one.title }}</h2>
-                    <span>{{ body_one.slogan }}</span>
-                    <p>{{ body_one.body }}</p>
+                    
+                    {% autoescape off %}
+                    {{ body_one.body }}
+                    {% endautoescape %}
                 </div>
             </div>
         </div>
@@ -67,45 +81,41 @@
                 <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
                     <!-- Section Tittle -->
                     <div class="section-tittle text-center mb-80">
-                        <span>What we are doing</span>
-                        <h2>We Are In A Mission To Help The Helpless</h2>
+                        <span>
+                            {% autoescape off %}
+                            {{ titles.home_third_section_span }}
+                            {% endautoescape %}
+                        </span>
+                        <h2>
+                            {% autoescape off %}
+                            {{ titles.home_third_section_head }}
+                            {% endautoescape %}
+                        </h2>
                     </div>
                 </div>
             </div>
             <div class="row">
+                {% for post in recent_post %}
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
-                        <div class="cat-icon">
-                            <span class="flaticon-null-1"></span>
+  
+                    <div class="single-cat {% if forloop.counter0 == 1 %} active {% endif %} text-center mb-50" style='padding-top:65px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'>
+                        <div class='row justify-content-center'>
+                            <div class="cat-icon">
+                                <a href='/program?data={{ post.id }}'><img src='{{ post.photo.url }}'></a>
+                            </div>
                         </div>
-                        <div class="cat-cap">
-                            <h5><a href="services.html">Clean Water</a></h5>
-                            <p>The sea freight service has grown conside rably in recent years. We spend timetting to know your processes to.</p>
+                        <div class='row'>
+                            <div class="cat-cap" style='padding-top:40px;'>
+                                <h5><a href="/program?data={{ post.id }}">{{ post.title }}</a></h5>
+                                <p>{{ post.brief_info }}</p>
+                            </div>
                         </div>
+
+                        
+                        
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6" >
-                    <div class="single-cat active text-center mb-50" >
-                        <div class="cat-icon">
-                            <span class="flaticon-think"></span>
-                        </div>
-                        <div class="cat-cap">
-                            <h5><a href="services.html">Clean Water</a></h5>
-                            <p>The sea freight service has grown conside rably in recent years. We spend timetting to know your processes to.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
-                        <div class="cat-icon">
-                            <span class="flaticon-gear"></span>
-                        </div>
-                        <div class="cat-cap">
-                            <h5><a href="services.html">Clean Water</a></h5>
-                            <p>The sea freight service has grown conside rably in recent years. We spend timetting to know your processes to.</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -118,24 +128,29 @@
                     <div class="about-caption mb-50">
                         <!-- Section Tittle -->
                         <div class="section-tittle mb-35">
-                            <span>{{ body_values.title }}</span>
-                            <h2>{{ body_values.slogan }}</h2>
+                            {% autoescape off %}
+                            {{ body_values.body }}
+                            {% endautoescape %}
                         </div>
-                        <p>{{ body_values.body }}</p>
                         
                     </div>
+                    
                     <a href="/about" class="button button-contactForm boxed-btn-blue">About US</a>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <!-- about-img -->
-                    <div class="about-img " >
-                        <div class="about-font-img d-none d-lg-block" style='border-top: 6px solid rgba(30, 116, 201, 0.9);border-right: 6px solid rgba(30, 116, 201, 0.9);'>
-                            <img src="{{ body_values.photo_small.url }}" width='300px' height='250px' alt="">
+                    <div class='row'>
+                        <div class="about-img " >
+                            <div class="about-font-img d-none d-lg-block" style='border-top: 6px solid rgba(30, 116, 201, 0.9);border-right: 6px solid rgba(30, 116, 201, 0.9);'>
+                                <img src="{{ body_values.photo_small.url }}" width='300px' height='250px' alt="">
+                            </div>
+                            <div class="about-back-img ">
+                                <img src="{{ body_values.photo_big.url }}" width='400px' height='400px' alt="">
+                            </div>
                         </div>
-                        <div class="about-back-img ">
-                            <img src="{{ body_values.photo_big.url }}" width='400px' height='400px' alt="">
-                        </div>
+
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -150,8 +165,16 @@
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
                     <div class="section-tittle text-center mb-90">
-                        <span>Our Cases you can see</span>
-                        <h2>Explore our latest causes that we works</h2>
+                        <span>
+                            {% autoescape off %}
+                            {{ titles.home_our_work_span }}
+                            {% endautoescape %}
+                        </span>
+                        <h2>
+                            {% autoescape off %}
+                            {{ titles.home_our_work_head }}
+                            {% endautoescape %}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -164,8 +187,8 @@
                                 <a href='/program?data={{ event.id }}'><img src="{{ event.photo.url }}" alt=""></a>
                                 <!-- Blog date -->
                                 <div class="blog-date text-center">
-                                    <span>24</span>
-                                    <p>Now</p>
+                                    <span>{{ event.organized_at | date:'d' }}</span>
+                                    <p>{{ event.organized_at | date:'M' }}</p>
                                 </div>
                             </div>
                             <div class="blog-cap">
@@ -188,16 +211,24 @@
                 <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
                     <!-- Section Tittle -->
                     <div class="section-tittle section-tittle2 text-center mb-70">
-                        <span>Our Team</span>
-                        <h2>Our Expert Volunteer Always ready</h2>
+                        <span>
+                            {% autoescape off %}
+                            {{ titles.all_our_team_span }}
+                            {% endautoescape %}
+                        </span>
+                        <h2>
+                            {% autoescape off %}
+                            {{ titles.all_our_team_head }}
+                            {% endautoescape %}
+                        </h2>
                     </div> 
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8">
-                    <div class='row'>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class='row justify-content-center'>
                         {% for team in teams %}
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                             <div class="single-team mb-30">
                                 <div class="team-img">
                                     
@@ -227,28 +258,32 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class='row'>
                         
                         <div class="section-tittle section-tittle2 text-center mb-70">
-                            <h2>Our Advisors/Supporters</h2>
+                            <h2>
+                                {% autoescape off %}
+                                {{ titles.all_our_advisors }}
+                                {% endautoescape %}
+                            </h2>
                         </div> 
                     </div>
-                    <div class='row'>
+                    <div class='row justify-content-center'>
                 
                         {% for advisor in advisors %}
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            <div class="single-team mb-30">
-                                <div class="team-img" style='width:170px;height:200px;border-radius:50px 50px 50px 50px ;'>
-                                    <img src="{{ advisor.photo.url }}" alt="">
+                        <div class="col-lg-4 col-md-6 col-sm-4">
+                            <div class="single-team mb-20">
+                                <div class="team-img" style='width:100px;height:130px;border-radius:20px 20px 20px 20px ;margin-right: 0;'>
+                                    <img src="{{ advisor.photo.url }}" style='width:100px;height:130px;' alt="">
                                     <!-- Blog Social -->
-                                    <ul class="team-social">
+                                    <ul class="team-social" style='bottom: 13px;'>
                                         {% if advisor.facebook != None %}
-                                            <li><a href="{{ advisor.facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="{{ advisor.facebook }}" style='width:27px;height:27px;text-align:center;margin-left:0;line-height:30px;'><i class="fab fa-facebook-f"></i></a></li>
                                         {% endif %}
                                         
                                     </ul>
-                                    <div class="team-caption" >
+                                    <div class="team-caption-small" >
                                         <h3>{{ advisor.first_name }} {{ advisor.last_name }}</h3>
                                         <p>{{ advisor.post }}</p>
                                     </div>
@@ -268,7 +303,11 @@
     <div class='container' style="padding-top: 5px;padding-bottom: 50px;">
         <div class='row'>
             <div class='col-lg-12'>
-                <h1 style='text-align:center;padding:20px;color:#011033;font-weight:bolder;font-size: 50px;'>Our  Partners</h1>
+                <h1 style='text-align:center;padding:20px;color:#011033;font-weight:bolder;font-size: 50px;'>
+                    {% autoescape off %}
+                    {{ titles.all_our_partners }}
+                    {% endautoescape %}
+                </h1>
                 
             </div>
         </div>
@@ -277,7 +316,11 @@
             
             <section class="customer-logos slider">
                 {% for partner in partners %}
-                <div class="slide"><a href='{{ partner.url }}' ><img src="{{ partner.photo.url }}"></a></div>
+                <div class="slide"  style='height: 220px;padding-top: 20px;'>
+                    <a href='{{ partner.url }}' >
+                        <img src="{{ partner.photo.url }}">
+                    </a>
+                </div>
                 {% endfor %}
             </section>
         </div>

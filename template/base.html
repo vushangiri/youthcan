@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/xtra/img.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/xtra/loader.css' %}">
     
     
     
@@ -55,8 +56,8 @@
                             <div class="row d-flex justify-content-between align-items-center">
                                 <div class="header-info-left d-flex">
                                     <ul>     
-                                        <li>Phone: +977 - {{ data.phone }}</li>
-                                        <li>Email: {{ data.email }}</li>
+                                        <li>Phone:<a href="tel:{{ data.phone }}" style='color:black;'> +977 - {{ data.phone }}</a></li>
+                                        <li>Email:<a href="mailto:{{ data.email }}" style='color:black;'> {{ data.email }}</a></li>
                                     </ul>
                                     <div class="header-social">    
                                         <ul>
@@ -70,7 +71,7 @@
                                 </div>
                                 <div class="header-info-right d-flex align-items-center">
                                     <ul class="contact-now">     
-                                        <a href="#" id=''><button class='boxed-btn-small'>Join us</button></a>
+                                        <a href="#" data-toggle="modal" data-target="#modaljoinus"><button class='boxed-btn-small'>Join us</button></a>
                                     </ul>
                                     <ul class="contact-now">     
                                         <li><a href="#" id='subscribe'>Subscribe Now</a></li>
@@ -87,7 +88,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="/"><img src="{% static 'assets/img/logo/fulllogowhite.png' %}" width='220' height='80' alt=""></a>
+                                    <a href="/"><img src="{{ data.logo.url }}" width='220' height='80' alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10">
@@ -99,14 +100,15 @@
                                                 <li><a href="/">Home</a></li>
                                                 <li><a href="/about">About</a></li>
                                                 <li><a href="/events">Events</a></li>
-                                                <li><a href="/">Affiliates</a></li>
+                                                <li><a href="/affiliates">Affiliates</a></li>
                                                 <li><a href="/contact">Contact</a></li>
                                             </ul>
                                         </nav>
                                     </div>
+                                   
                                     <!-- Header-btn -->
                                     <div class="header-right-btn d-none d-lg-block ml-20">
-                                        <a href="/contact" class="button button-contactForm boxed-btn">Donate</a>
+                                        <a href="/contact" class="button button-contactForm boxed-btn" data-toggle="modal" data-target="#modaldonate">Donate</a>
                                     </div>
                                 </div>
                             </div> 
@@ -121,6 +123,102 @@
         </div>
         <!-- Header End -->
     </header>
+    <div class="modal fade" id="modaldonate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 font-weight-bold">Support Us!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+            <h1>You can be the part of our Initiation</h1>
+        </div>
+
+        <div class="md-form mb-4">
+            <h1>Nepal Something Bank</h1>
+          <h2>Account name: </h2><p>Hello World</p>
+          <h2>Account number: </h2><p>123123123</p>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modaljoinus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 font-weight-bold">Join our team or be a Volunteer</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form action='' id='applicationform' method='post' enctype="multipart/form-data">{% csrf_token %}
+        <div class="md-form">
+            <h2>Apply Here</h2>
+            
+            <p>Or email us your resume at: {{ data.email }}</p>
+            
+            
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label>Name</label>
+                        <div class="form-group">
+                        {{ application.name }}
+                    </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label>Email</label>
+                        <div class="form-group">
+                            {{ application.email }}
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label>Address</label>
+                        <div class="form-group">
+                            {{ application.address }}
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label>CV/Resume (*.pdf)</label>    
+                        <div class="form-group">
+                            {{ application.cv }}
+                        </div>            
+                        
+ 
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label>Phone number</label>
+                    <div class="form-group">
+                        {{ application.phone }}
+                    </div>
+                    </div>
+                    
+                </div>        
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" name="submit" class="boxed-btn">Submit</button>
+        </div>
+        </form>
+      </div>
+      <div class="overlay"></div>
+    </div>
+  </div>
+</div>
+
+
     <!-- header end -->
     <div>
         {% for messages in messages %}
@@ -151,7 +249,7 @@
                             <div class="single-footer-caption mb-30">
                                 <div class="footer-tittle">
                                     <div class="footer-logo mb-20">
-                                        <a href="/"><img src="{% static 'assets/img/logo/fulllogowhite.png' %}" width='220' height='80' alt=""></a>
+                                        <a href="/"><img src="{{ data.logo.url }}" width='220' height='80' alt=""></a>
                                     </div>
                                 </div>
                             </div>
@@ -163,10 +261,10 @@
                                     <h4>Contact Info</h4>
                                     <ul>
                                         <li>
-                                            <p>Address : {{ data.address }}
+                                            <p>Address :<a href="https://www.maps.google.com/?q=27.725003,85.338299" target="_blank"> {{ data.address }}</a>
                                         </li>
-                                        <li>Phone : +977 - {{ data.phone }}</li>
-                                        <li>Email : {{ data.email }}</li>
+                                        <li>Phone :<a href="tel:{{ data.phone }}" > +977 - {{ data.phone }}</a></li>
+                                        <li>Email :<a href="mailto:{{ data.email }}" > {{ data.email }}</a></li>
                                     </ul>
                                 </div>
 
@@ -177,9 +275,9 @@
                                 <div class="footer-tittle">
                                     <h4>Important Link</h4>
                                     <ul>
-                                        <li><a href="/events">Projects</a></li>
+                                        <li><a href="/events">Events</a></li>
                                         <li><a href="/about">About Us</a></li>
-                                        <li><a href="#">Testimonials</a></li>
+                                        <li><a href="/affiliates">Affiliates</a></li>
                                         <li><a href="/contact">Contact Us</a></li>
                                     </ul>
                                 </div>
@@ -195,8 +293,8 @@
                                 <!-- Form -->
                                 <div class="footer-form" >
                                     
-                                    <form action="/subscribe"
-                                    method="post" class="subscribe_form relative mail_part">{% csrf_token %}
+                                    <form action="/subscribenews"
+                                    method="post" id='subscribenews' class="subscribe_form relative mail_part">{% csrf_token %}
                                         <input type="email" name="email" placeholder="Email Address"
                                         class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = ' Email Address '" required>
@@ -248,8 +346,7 @@
     </div>
 
     <!-- JS here -->
-    {% block script %}
-    {% endblock %}
+    
     <script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
     
     <!-- Jquery, Popper, Bootstrap -->
@@ -282,24 +379,31 @@
     <script src="{% static './assets/js/hover-direction-snake.min.js' %}"></script>
 
     <!-- contact js -->
-    <script src="{% static './assets/js/contact.js' %}"></script>
+   
     <script src="{% static './assets/js/jquery.form.js' %}"></script>
     <script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
     <script src="{% static './assets/js/mail-script.js' %}"></script>
     <script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+
+
     <!-- Jquery Plugins, main Jquery -->	
     <script src="{% static './assets/js/plugins.js' %}"></script>
     <script src="{% static './assets/js/main.js' %}"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.js'></script>
     <script src="{% static './assets/xtra/slider.js' %}"></script>
+    <script src="{% static './assets/xtra/subscribe.js' %}"></script>
     <script src="{% static './assets/xtra/img.js' %}"></script>
+
+   
+    {% block script %}
+    {% endblock %}
     <script>
     $(document).ready(function(){
         $('#subscribe').click(function(event){
             event.preventDefault();
             var dialog = bootbox.prompt({
-                title: "Please enter your email address to Subscribe for Newsletter",
+                title: "<h1>Subscribe to hear from us.</h1>",
+                
                 backdrop: true,
                 callback: function (result) {
                    if(result == null) {
@@ -309,25 +413,58 @@
                         url: '/subscribe',
                         type: 'POST',
                         data: { 
-                            'result': result 
+                            'email': result 
                         },         
                         }).done(function(resp) {
                             if(resp.result == 'ok') {
-                                bootbox.alert('Thank You for Subscribing')
+                                alert('Thank You for Subscribing')
                             }else {
-                                bootbox.alert('Please provide a valid email address')
+                                alert('Please provide a valid email address')
                             }
                         })
                    }
                 }   
             });
         });
-    });
+    });  
+
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#applicationform').submit(function(event){
+                console.log('its working');
+                event.preventDefault();
+                let form_data = new FormData($('#applicationform').get(0));
+                $.ajax({
+                    url: '/joinus',
+                    type: 'POST',
+                    data: form_data, 
+                    contentType: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,      
+                }).done(function(resp) {
+                    if (resp.result == 'ok') {
+                        alert('Submitted Successfully');
+                        $('#applicationform').trigger('reset');
+                    } else {
+                        alert('Internal error with code - ' + resp.result);
+                        $('#applicationform').trigger('reset');
+                    }
+                });
+            });
+            $(document).on({
+            ajaxStart: function(){
+                
+                $("body").addClass("loading");
+            },
+            ajaxStop: function(){ 
+                $("body").removeClass("loading"); 
+            }    
+            });
+        });
         
 
-    
+        </script>
         
-    </script>
-    
     </body>
 </html>

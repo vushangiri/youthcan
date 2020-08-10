@@ -1,45 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block title %}Events{% endblock %}
 {% block body %}
     <main>
-        
-    <div class='container' >
+    
+    <div class='container' style='padding-top: 10px;'>
         <div class='row'>
-            <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+            <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel" style='width:100%;'>
                 <!--Indicators-->
-                <ol class="carousel-indicators">
+                <ol class="carousel-indicators" style='z-index: 1;'>
                     {% for p in photos %}
-                    <li data-target="#carousel-example-1z" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %} active {% endif %}"></li>
+                    <li data-target="#carousel-example-2" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %} active {% endif %}" ></li>
                     {% endfor %}
                 </ol>
                 <!--/.Indicators-->
                 <!--Slides-->
-                <div class="carousel-inner" style='width:600px;height:400px;' role="listbox">
+                <div class="carousel-inner" style='border-radius: 20px;width:100%;height:500px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.336), 0 6px 20px 0 rgba(0, 0, 0, 0.288);' role="listbox">
                     {% for p in photos %}
                     <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
                         <div class="view">
-                            <img class="d-block w-100" src="{{ p.photo.url }}"
+                            
+                            <img class="d-block w-100" src="{{ p.photo.url }}" style='border-radius:20px;width:100%;height:500px;'
                             alt="First slide">
-                            <div class="mask rgba-black-light"></div>
-                        </div>
-                        
-                        <div class="carousel-caption">
-                            <h3 class="h3-responsive">Light mask</h3>
-                            <p>First text</p>
+                            
                         </div>
                     </div>
+
                     {% endfor %}
                 </div>
                 <!--/.Slides-->
                 <!--Controls-->
-                <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carousel-example-2" role="button" style='border-radius: 20px 0px 0px 20px;background:linear-gradient(to right, rgba(3, 30, 116, 0.877), transparent);' data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#carousel-example-2" role="button" style='border-radius: 0px 20px 20px 0px;background:linear-gradient(to left, rgba(3, 29, 116, 0.877), transparent);' data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                    <span class="sr-only" >Next</span>
                 </a>
                 <!--/.Controls-->
             </div>	
@@ -54,43 +51,164 @@
     
     <!-- Hero End -->
     <!-- Our Cases Start -->
-    <section class="home-blog-area" style='padding-top: 50px;padding-bottom: 20px;'>
+    
+
+    </section>
+    <section class="blog_area section-padding">
         <div class="container">
-            <!-- Section Tittle -->
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
                     <div class="section-tittle text-center mb-90">
-                        <span>Our Cases you can see</span>
-                        <h2>Explore our latest causes that we works</h2>
+                        <span>
+                            {% autoescape off %}
+                            {{ titles.events_our_work_span }}
+                            {% endautoescape %}
+                        </span>
+                        <h2>
+                            {% autoescape off %}
+                            {{ titles.events_our_work_head }}
+                            {% endautoescape %}
+                        </h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                {% for event in events %}
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <div class="home-blog-single mb-30">
-                        <div class="blog-img-cap">
-                            <div class="blog-img">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        {% for event in page %}
+                        <article class="blog_item">
+                            <div class="blog_item_img">
                                 <a href='/program?data={{ event.id }}'><img src="{{ event.photo.url }}" alt=""></a>
-                                <!-- Blog date -->
-                                <div class="blog-date text-center">
-                                    <span>24</span>
-                                    <p>Now</p>
+                                <div class="blog_item_date">
+                                    <h3>{{ event.organized_at | date:'d' }}</h3>
+                                    <p>{{ event.organized_at | date:'M' }}</p>
                                 </div>
                             </div>
-                            <div class="blog-cap">
-                                
-                                <h3><a href="/program?data={{ event.id }}">{{ event.title }}</a></h3>
-                                <p>{{ event.slogan }}</p>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="/program?data={{ event.id }}">
+                                    <h2 class="blog-head" style="color: #2d2d2d;">{{ event.title }}</h2>
+                                </a>
+                                <p>{{ event.brief_info }}</p>
                             </div>
-                        </div>
+                        </article>
+                        {% endfor %}
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            {% if page.has_other_pages %}
+                            <ul class="pagination">
+                                {% if page.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page={{ page.previous_page_number }}" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a href="" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% for i in page.paginator.page_range %}
+                                    {% if page.number == i %}
+                                    <li class="page-item active-nav">
+                                        <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item">
+                                        <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page.has_next %}
+                                <li class="page-item">
+                                    <a href="?page={{ page.next_page_number }}" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a href="" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            
+                            {% endif %}
+                        </nav>
                     </div>
                 </div>
-                {% endfor %}
-            </div> 
-        </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn-blue"
+                                    type="submit">Search</button>
+                            </form>
+                        </aside>
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title" style="color: #2d2d2d;">Category</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Resaurant food</p>
+                                        <p>(37)</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Travel news</p>
+                                        <p>(10)</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </aside>
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title" style="color: #2d2d2d;">Upcoming Events</h3>
+                            <div class="media post_item">
+                                <img src="{% static 'assets/img/post/post_1.png' %}" alt="post">
+                                <div class="media-body">
+                                    <a href="blog_details.html">
+                                        <h3 style="color: #2d2d2d;">From life was you fish...</h3>
+                                    </a>
+                                    <p>January 12, 2019</p>
+                                </div>
+                            </div>
+                            
+                        </aside>
+                        
 
+                        
+                        <aside class="single_sidebar_widget newsletter_widget">
+                            <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
+                            <form action="/subscribe" id='subscribenews' method='post'>{% csrf_token %}
+                                <div class="form-group">
+                                    <input type="email" name='email' class="form-control" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn-blue"
+                                    type="submit" name='submit'>Subscribe</button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- Featured_job_end -->
     </main>
+{% endblock %}
+{% block script %}
+<script src="{% static './assets/xtra/subscribe.js' %}"></script>
 {% endblock %}
